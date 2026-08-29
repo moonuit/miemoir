@@ -1,0 +1,150 @@
+/* 下固定ナビ（novel1専用） */
+.ep-nav{
+  --vv-bottom: 0px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: var(--bg);
+  border-top: var(--border);
+  padding-bottom: env(safe-area-inset-bottom);
+  transform: translate3d(0, var(--vv-bottom), 0);
+  will-change: transform;
+  contain: layout paint;
+}
+
+.ep-nav.is-hidden{
+  transform: translate3d(0, calc(110% + var(--vv-bottom)), 0);
+}
+
+.ep-nav__inner{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ep-btn:active { transform: translateY(1px); }
+
+
+.ep-btn:hover{
+  background: var(--hover);
+}
+
+.ep-btn.is-disabled{
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+main {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto 100px;
+  transform: translateY(-30px);
+}
+
+  #themeToggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* Tally ロゴ（クリック無効化） */
+iframe[src*="tally.so"] {
+  pointer-events: auto;
+}
+
+/* ロゴ部分だけ無効化（効く場合） */
+iframe[src*="tally.so"] .tally-branding,
+iframe[src*="tally.so"] a[href*="tally.so"] {
+  pointer-events: none !important;
+}
+
+.cheer-box {
+  position: relative;
+}
+
+/* Tallyロゴガード（レスポンシブ対応） */
+.tally-shield {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40%;        
+  max-width: 200px;  
+  height: 80px;     
+  pointer-events: auto;
+  background: transparent;
+}
+
+#storyBody{
+ padding: 60px 0 100px;
+}
+
+#storyBody p, #storyBody li{
+  padding:0;
+  margin: 1em 0; 
+  line-height: 1.9; 
+  letter-spacing: 0;
+  font-size: 14px;
+   font-family: "Noto Sans JP", sans-serif;
+   /* font-family: "Inter", system-ui, sans-serif;  */
+}
+.ep-btn { -webkit-tap-highlight-color: transparent; }
+
+
+hr {
+  border: none;
+  margin: 5em 0;
+}
+
+hr::after {
+  content: "✦";
+   margin-left:3em;
+}
+
+hr.stars::after {
+  content: "✦ ✦ ✦";
+    margin-left:3em;
+}
+
+.ep-btn,
+.ep-btn:link,
+.ep-btn:visited {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  color: var(--text);
+  background: transparent;
+  border: var(--border);
+  border-radius: 999px;
+  box-shadow: none;
+
+  font: inherit;
+  line-height: 1;
+  text-decoration: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.ep-btn i {
+  display: block;
+  line-height: 1;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.theme-toggle{
+  width: 40px;
+  height: 40px;  
+}

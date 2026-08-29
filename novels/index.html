@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<script>
+(function () {
+  try {
+    const saved = localStorage.getItem("theme");
+    document.documentElement.dataset.theme =
+      saved === "light" || saved === "dark" ? saved : "light";
+  } catch (e) {
+    document.documentElement.dataset.theme = "light";
+  }
+})();
+</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>novels | sunjour</title>
+   <link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="/assets/js/auth.js"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="6828eea7-6029-4b61-86bd-80f79053c8bd"></script>
+</head>
+<style>
+ .update-scroll p {
+  margin: 0 0 .4rem;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 0;
+}
+.update-scroll p {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.update-scroll {
+  max-height: 70px;
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
+}
+
+.update-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.update-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.update-scroll::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 999px;
+}
+
+.update-scroll::-webkit-scrollbar-thumb:hover {
+  background: currentColor;
+}
+.update-scroll::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  opacity: .5;
+}
+
+.update-box .card{
+  padding:0;
+  margin:0;
+}
+
+.update-scroll{
+  margin:0;
+  padding:0;
+}
+
+.update-scroll ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.update-scroll li{
+  font-size:.9rem;
+  margin-bottom:.4rem;
+}
+</style>
+
+<body>
+  <div id="siteHeader" data-include="/assets/header.html"></div>
+    <main class="page-enter">
+<!-- 
+        <p class="contents">
+          <a href="#name">name</a>  <span class="sep"> | </span>
+          <a href="#long">novels</a>   <span class="sep"> | </span>
+          <a href="#short">short</a>  <span class="sep"> | </span>
+          <a href="#message">message</a>
+        </p> -->
+
+  <section class="update-box card">
+  <!-- <h2>update</h2> -->
+  <div class="update-scroll">
+    <div id="update-list"></div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+async function loadUpdates() {
+  try {
+    const res = await fetch('/log/update.md');
+    if (!res.ok) throw new Error('update.md の読み込み失敗');
+
+    const md = await res.text();
+    document.getElementById('update-list').innerHTML = marked.parse(md);
+  } catch (err) {
+    console.error(err);
+    document.getElementById('update-list').innerHTML = '<p>更新履歴を読み込めませんでした。</p>';
+  }
+}
+
+loadUpdates();
+</script>
+
+         <section class="card" id="name">
+   
+          <details>
+           <summary id="nameSummary" class="cover__btn name-row">
+              name
+              <div id="saveNotice" class="save-notice" aria-live="polite">&nbsp;</div>
+            </summary>
+
+              <label for="nameInput" class="visually-hidden">主人公の名前</label>
+              <input id="nameInput" type="text" placeholder="ナマエ" 
+              name="yume-name" autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"/>
+
+              <div class="actions">
+                  <button id="saveBtn" type="button" disabled>save</button>
+                  <button id="deleteBtn" type="button" disabled>delete</button>
+              </div>
+          </details>
+      </section>
+      
+        <section class="card">
+         <h2>novels</h2>
+
+         <h4>long</h4>
+
+          <h3 class="episode-title">
+            <a href="/deneb/" class="novel-btn" data-novel="deneb">
+              <span class="title" style="text-align: center;">ワンダフル＋ナイトメア</span>
+
+              <span class="tag">
+                キルア<span class="sep"> | </span>
+                原作沿い<span class="sep"> | </span>
+                ダークロマンス
+              </span>
+            </a>
+          </h3>
+          
+          <br>
+
+          <!-- <h4>short/sss</h4> -->
+
+          <!-- <h3 class="episode-title">
+            <a href="/novels/00/?ep=00">
+              <i class="bi bi-stars"></i> 悪女のフィアンセは仕事人間</a>          
+             <span class="tag">イルミ</span>
+          </h3> -->
+
+          <!-- <h3 class="episode-title">
+            <a href="/vega/?ep=00">
+              <i class="bi bi-stars"></i> love suicide</a>          
+             <span class="tag">キルア</span>
+          </h3> -->
+
+          <!-- <h3 class="episode-title">
+            <a href="/vega/02/?ep=00">
+              <i class="bi bi-stars"></i> hentai×hentai</a>
+             <span class="tag">ヒソカ</span>
+          </h3> -->
+  
+    </section>
+    
+  
+<!-- <div id="footer"></div> 
+<script src="/assets/js/footer.js"></script> -->
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/include.js"></script>
+<script src="/assets/js/header.js"></script>
+<script src="/assets/js/novels.js"></script>
+
+<script>
+/*
+  =========================================
+  hashで飛んだときに
+  ・対象セクションまでヘッダーオフセット付きでスクロール
+  ・そのセクション内の <details> を自動で開く
+  ・URLの # は残さない（replaceState）
+  =========================================
+*/
+(() => {
+  const HEADER_OFFSET = 70;
+
+  function openDetailsInTarget(target) {
+    if (!target) return;
+
+    // 1) hash対象が <details> ならそれを開く
+    if (target.matches && target.matches("details")) {
+      target.open = true;
+      return;
+    }
+
+    // 2) hash対象の中に <details> があればそれを開く
+    const nested = target.querySelector ? target.querySelector("details") : null;
+    if (nested) {
+      nested.open = true;
+      return;
+    }
+
+    // 3) hash対象が section等で、近くに <details> があるケース（保険）
+    const closestDetails = target.closest ? target.closest("details") : null;
+    if (closestDetails) {
+      closestDetails.open = true;
+    }
+  }
+
+  function scrollToTarget(target) {
+    if (!target) return;
+
+    const y =
+      target.getBoundingClientRect().top +
+      window.scrollY -
+      HEADER_OFFSET;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+
+  function handleHash(hash) {
+    if (!hash) return;
+
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    // 先に details を開く → 高さが変わることがあるから
+    openDetailsInTarget(target);
+
+    // 次にスクロール
+    scrollToTarget(target);
+  }
+
+  // 1) ページ内リンク（#xxx）クリック：開いてスクロール、URLから # を消す
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const hash = link.getAttribute("href");
+    if (!hash || hash === "#") return;
+
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    e.preventDefault();
+    handleHash(hash);
+
+    // URLの # を消す（履歴は増やさない）
+    history.replaceState(null, "", location.pathname + location.search);
+  });
+
+  // 2) 他ページから # 付きで来た場合：初回ロードで開いてスクロール、あとで # を消す
+  window.addEventListener("load", () => {
+    if (!location.hash) return;
+
+    const hash = location.hash;
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    // load 後に処理（iframeや画像でズレるのを軽減）
+    handleHash(hash);
+
+    // 少し待ってから # を消す
+    setTimeout(() => {
+      history.replaceState(null, "", location.pathname + location.search);
+    }, 300);
+  });
+})();
+</script>
+
+</body>
+</html>
